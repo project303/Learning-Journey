@@ -1,1 +1,1 @@
-# Learning-Journey
+# My Learning Journey Repository
