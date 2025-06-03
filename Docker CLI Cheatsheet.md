@@ -80,5 +80,11 @@ docker exec -it web bash
 Show list of all images
 ```
 docker images
+docker image ls	List images
+```
+
+Delete an image
+```
+docker rmi test1:latest
 ```
 
