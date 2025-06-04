@@ -105,3 +105,9 @@ Delete all unused networks
 ```
 docker network prune
 ```
+
+To find the IP address
+```
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' SERVICE_NAME
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres
+```
