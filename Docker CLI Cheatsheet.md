@@ -26,7 +26,7 @@ docker run -d IMAGE_NAME
 docker run -d nginx
 ```
 
-## Manage Containers
+## Managing Containers
 
 Show list of running containers
 ```
@@ -74,8 +74,7 @@ docker exec -it web bash
 ```
 
 
-
-## Manage Images
+## Managing Images
 
 Show list of all images
 ```
@@ -88,3 +87,21 @@ Delete an image
 docker rmi test1:latest
 ```
 
+
+## Managing Networks
+
+List all your Docker networks
+```
+docker network ls
+```
+
+Delete a network
+```
+docker network rm NETWORK_NAME
+docker network rm demo-network
+```
+
+Delete all unused networks
+```
+docker network prune
+```
