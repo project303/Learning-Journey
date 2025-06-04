@@ -62,9 +62,9 @@ docker rm -f CONTAINER_NAME
 docker rm -f web
 ```
 
-Delete stopped containers
+Delete all stopped containers
 ```
-docker rm prune
+docker container prune
 ```
 
 Start a shell inside running containers
