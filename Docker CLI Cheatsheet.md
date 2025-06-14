@@ -111,3 +111,22 @@ To find the IP address
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' SERVICE_NAME
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres
 ```
+
+
+## Detailed Information
+
+To find all detailed information
+```
+docker inspect CONTAINER_NAME
+docker inspect wordpress
+```
+
+To get docker compose directory
+```
+docker inspect wordpress | grep "com.docker.compose.project.working_dir"
+```
+
+To get docker compose file
+```
+docker inspect wordpress | grep "com.docker.compose.project.config_files"
+```
