@@ -19,6 +19,9 @@
       - net
 ```
 
+## Persiapkan database
+database kosong: wp-dev02
+
 ## Routing port di SWAG
 File: /home/admin247/swag/data/swag/nginx/site-confs/default.conf
 
@@ -46,5 +49,7 @@ server {
     }
 }
 ```
+
+
 
 
