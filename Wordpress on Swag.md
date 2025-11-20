@@ -50,6 +50,44 @@ server {
 }
 ```
 
+File: /home/admin247/swag/docker-compose.yml
+```
+    ports:
+      - 8882:8882  # wp-dev02
+```
+
+## Jalankan service
+```
+docker compose up wp-dev02 -d
+```
+
+## Akses pada browser
+```
+https://learn.solusi247.com:8882
+```
+
+Nah biasanya tidak ke routing ke port 8882
+
+## Buat WP_HOME
+File: /home/admin247/swag/data/wp-dev02/wp-config.php
+```
+define( 'WP_HOME', 'https://learn.solusi247.com:8882' );
+define( 'WP_SITEURL', 'https://learn.solusi247.com:8882' );
+$_SERVER['HTTP_HOST'] = 'learn.solusi247.com:8882';
+$_SERVER['REMOTE_ADDR'] = 'https://learn.solusi247.com:8882';
+$_SERVER[ 'SERVER_ADDR' ] = 'learn.solusi247.com:8882';
+
+if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+	$_SERVER['HTTPS']='on';
+
+/* That's all, stop editing! Happy publishing. */
+```
+
+## Akses kembali melalui browser
+```
+https://learn.solusi247.com:8882
+```
+
 
 
 
