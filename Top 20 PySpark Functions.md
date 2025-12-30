@@ -186,3 +186,146 @@ Businesses often need data in a “report-friendly” format. Pivoting enables
 multi-year, multi-region comparisons, simplifying revenue trend analysis
 and performance tracking.
 
+
+## 13. window() + row_number() — Ranking Within Groups
+
+Used for window-based computations like ranking or cumulative sums.
+
+```
+from pyspark.sql.window import Window
+from pyspark.sql.functions import row_number
+windowSpec = Window.partitionBy("dept").orderBy(col("salary").desc())
+df = df.withColumn("rank", row_number().over(windowSpec))
+```
+
+**Business Impact:**
+
+Essential for identifying top performers, highest revenue generators, or
+trend leaders within departments. These window operations fuel advanced
+analytics and real-time insights for business strategy.
+
+
+## 14. lead() / lag() — Look Around Rows
+
+Access previous or next row values.
+
+```
+from pyspark.sql.functions import lag
+df = df.withColumn("prev_salary", lag("salary", 1 ).over(windowSpec))
+```
+
+**Business Impact:**
+
+These functions enable trend and variance analysis — crucial for financial
+forecasting, customer churn studies, or salary progression models in
+enterprise analytics.
+
+
+## 15. collect_list() / collect_set() — Aggregate to Arrays
+
+Collects values into lists or sets.
+
+```
+from pyspark.sql.functions import collect_list
+df.groupBy("dept").agg(collect_list("employee")).show()
+```
+
+**Business Impact:**
+
+Helps in creating summarized, hierarchical datasets like “all products per
+category” or “all employees per team,” making it easy to feed data into
+recommendation engines or BI visualizations.
+
+
+## 16. from_json() / to_json() — Handle JSON Columns
+
+Converts JSON strings to structured columns and vice versa.
+
+```
+from pyspark.sql.functions import from_json, schema_of_json
+schema = schema_of_json('{"name":"string","age":"integer"}')
+df = df.withColumn("data", from_json(col("json_col"), schema))
+```
+
+**Business Impact:**
+
+Modern pipelines often ingest JSON-based logs or event data. These
+functions simplify semi-structured ingestion, ensuring business systems can
+analyze logs, web events, or telemetry seamlessly.
+
+
+## 17. date_format() / to_date() / current_date()
+
+Work with dates and timestamps.
+
+```
+from pyspark.sql.functions import to_date, current_date
+df = df.withColumn("created_dt", to_date(col("created_at")))
+```
+
+**Business Impact:**
+
+Time-based analysis underpins every business metric — from monthly
+revenue to employee timesheets. Accurate date transformations ensure
+consistency in time-series reporting and SLA tracking.
+
+
+## 18. sql() — Mix SQL with PySpark Power
+
+Run SQL queries directly on Spark DataFrames.
+
+```
+df.createOrReplaceTempView("employees")
+spark.sql("SELECT dept, AVG(salary) FROM employees GROUP BY dept").show()
+```
+
+**Business Impact:**
+
+Enables analysts and engineers to collaborate seamlessly. Teams can apply
+complex SQL logic within scalable Spark environments, bridging the gap
+between traditional BI and big data processing.
+
+
+## 19. cache() / persist() — Boost Performance
+
+Stores intermediate results in memory for faster reuse.
+
+```
+df.cache()
+df.count()
+```
+
+**Business Impact:**
+
+For iterative workloads like ML feature generation or report refreshes,
+caching cuts runtime drastically. This leads to faster insights, lower compute
+usage, and improved cluster efficiency.
+
+
+## 20. write() — Save Your Work Like a Pro
+
+Saves DataFrame to storage (CSV, Parquet, Delta, etc.).
+
+```
+df.write.mode("overwrite").parquet("output/path/")
+```
+
+**Business Impact:**
+
+Defines how processed data reaches downstream systems. Efficient writes in
+Parquet or Delta format ensure reliable storage, easy querying, and
+compliance with enterprise data governance.
+
+
+## Conclusion
+
+Mastering these 20 PySpark functions gives you the foundation and depth
+needed to handle any data engineering challenge — from simple ETL
+pipelines to advanced analytical workloads.
+
+Each function is a building block: learn to combine them efficiently, and
+you’ll not only write cleaner and faster Spark code, but also think like a
+distributed data engineer.
+
+Wishing you all the best in your Data Engineering journey!
+
